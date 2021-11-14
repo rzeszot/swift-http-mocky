@@ -20,6 +20,17 @@ public class Headers {
     request.value(forHTTPHeaderField: key)
   }
 
+  // MARK: -
+
+  public subscript(_ key: String) -> String? {
+    get {
+      value(for: key)
+    }
+    set(value) {
+      set(value, for: key)
+    }
+  }
+
 }
 
 extension Dictionary where Key == String, Value == String {

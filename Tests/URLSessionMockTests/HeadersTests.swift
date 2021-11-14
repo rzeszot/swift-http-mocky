@@ -65,4 +65,19 @@ final class HeadersTests: XCTestCase {
     XCTAssertEqual(headers.value(for: "key"), "bbb")
   }
 
+  // MARK: - Subscript
+
+  func test_subscript() {
+    headers["key"] = "aaa"
+
+    XCTAssertEqual(headers["key"], "aaa")
+  }
+
+  func test_subscript_override() {
+    headers["key"] = "aaa"
+    headers["key"] = "bbb"
+
+    XCTAssertEqual(headers["key"], "bbb")
+  }
+
 }
