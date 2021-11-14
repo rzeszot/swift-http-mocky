@@ -1,28 +1,14 @@
 // swift-tools-version:5.5
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "swift-urlsession-mock",
-    products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "swift-urlsession-mock",
-            targets: ["swift-urlsession-mock"]),
-    ],
-    dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-    ],
-    targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "swift-urlsession-mock",
-            dependencies: []),
-        .testTarget(
-            name: "swift-urlsession-mockTests",
-            dependencies: ["swift-urlsession-mock"]),
-    ]
+  name: "URLSessionMock",
+  products: [
+    .library(name: "URLSessionMock", targets: ["URLSessionMock"])
+  ],
+  targets: [
+    .target(name: "URLSessionMock"),
+    .testTarget(name: "URLSessionMockTests", dependencies: ["URLSessionMock"])
+  ]
 )
