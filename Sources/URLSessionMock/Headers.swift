@@ -1,6 +1,6 @@
 import Foundation
 
-public class Headers {
+final public class Headers {
 
   fileprivate var request = URLRequest(url: URL(string: "https://internal")!)
 
