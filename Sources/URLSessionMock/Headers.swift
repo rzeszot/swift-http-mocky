@@ -1,8 +1,22 @@
 import Foundation
 
-final public class Headers {
+final public class Headers: ExpressibleByDictionaryLiteral {
 
   fileprivate var request = URLRequest(url: URL(string: "https://internal")!)
+
+  // MARK: -
+
+  public init() {
+
+  }
+
+  // MARK: - ExpressibleByDictionaryLiteral
+
+  public init(dictionaryLiteral elements: (String, String)...) {
+    for (key, value) in elements {
+      add(value, for: key)
+    }
+  }
 
   // MARK: -
 

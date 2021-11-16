@@ -1,5 +1,5 @@
 import XCTest
-@testable import URLSessionMock
+import URLSessionMock
 
 final class HeadersTests: XCTestCase {
 
@@ -78,6 +78,20 @@ final class HeadersTests: XCTestCase {
     headers["key"] = "bbb"
 
     XCTAssertEqual(headers["key"], "bbb")
+  }
+
+  // MARK: - Expressible by Dictionary Literal
+
+  func test_init_dictionary() {
+    let headers: Headers = [
+      "Set-Cookie": "aaa",
+      "Set-Cookie": "bbb",
+      "Location": "https://example.org/redirected"
+    ]
+
+    XCTAssertEqual(headers.value(for: "Set-Cookie"), "aaa,bbb")
+    XCTAssertEqual(headers.value(for: "Location"), "https://example.org/redirected")
+    XCTAssertEqual(Array(Dictionary(headers).keys), ["Set-Cookie", "Location"])
   }
 
 }
