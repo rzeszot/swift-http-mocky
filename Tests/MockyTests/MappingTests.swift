@@ -16,11 +16,11 @@ final class MappingTests: XCTestCase {
   // MARK: - Mapping
 
   func test_mapping_init() {
-    let sut = Mapping(matcher: { request in true }, handler: { env in env.delay = 1 }, identifier: "sut-identifier")
+    let sut = Mapping(matcher: { request in true }, handler: { env in env.delay = 1 }, id: "sut-identifier")
 
     sut.handler(env)
 
-    XCTAssertEqual(sut.identifier, "sut-identifier")
+    XCTAssertEqual(sut.id, "sut-identifier")
     XCTAssertTrue(sut.matcher(.get("/")))
     XCTAssertEqual(env.delay, 1)
   }
@@ -31,7 +31,7 @@ final class MappingTests: XCTestCase {
     sut.handler(env)
 
     XCTAssertTrue(sut.matcher(.get("/hello")))
-    XCTAssertEqual(sut.identifier, "GET /hello")
+    XCTAssertEqual(sut.id, "GET /hello")
     XCTAssertEqual(env.delay, 2)
   }
 
@@ -41,7 +41,7 @@ final class MappingTests: XCTestCase {
     sut.handler(env)
 
     XCTAssertTrue(sut.matcher(.post("/hello")))
-    XCTAssertEqual(sut.identifier, "POST /hello")
+    XCTAssertEqual(sut.id, "POST /hello")
     XCTAssertEqual(env.delay, 3)
   }
 

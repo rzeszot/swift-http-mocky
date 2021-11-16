@@ -3,20 +3,20 @@ import Foundation
 public typealias Matcher = (URLRequest) -> Bool
 public typealias Handler = (Environment) -> Void
 
-struct Mapping {
+struct Mapping: Identifiable {
   public let matcher: Matcher
   public let handler: Handler
-  public let identifier: String?
+  public let id: String
 }
 
 extension Mapping {
   init(method: String, path: String, handler: @escaping Handler) {
-    let identifier = "\(method) \(path)"
+    let id = "\(method) \(path)"
     let matcher: Matcher = { request in
       try! request.httpMethod == method && request.url?.path(matches: path) == true
     }
 
-    self.init(matcher: matcher, handler: handler, identifier: identifier)
+    self.init(matcher: matcher, handler: handler, id: id)
   }
 
   static func get(path: String, handler: @escaping Handler) -> Mapping {
