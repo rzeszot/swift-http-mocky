@@ -1,5 +1,5 @@
 import XCTest
-import URLSessionMock
+import Mocky
 
 final class HeadersTests: XCTestCase {
   var headers: Headers!

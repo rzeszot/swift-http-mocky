@@ -1,5 +1,5 @@
 import XCTest
-@testable import URLSessionMock
+@testable import Mocky
 
 final class EnvironmentTests: XCTestCase {
   func test_init() {
@@ -16,3 +16,4 @@ final class EnvironmentTests: XCTestCase {
     XCTAssertNil(sut.response.body)
   }
 }
+

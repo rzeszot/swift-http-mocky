@@ -3,15 +3,15 @@
 import PackageDescription
 
 let package = Package(
-  name: "URLSessionMock",
+  name: "Mocky",
   platforms: [
     .iOS(.v15)
   ],
   products: [
-    .library(name: "URLSessionMock", targets: ["URLSessionMock"])
+    .library(name: "Mocky", targets: ["Mocky"])
   ],
   targets: [
-    .target(name: "URLSessionMock"),
-    .testTarget(name: "URLSessionMockTests", dependencies: ["URLSessionMock"])
+    .target(name: "Mocky"),
+    .testTarget(name: "MockyTests", dependencies: ["Mocky"])
   ]
 )

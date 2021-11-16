@@ -1,5 +1,5 @@
 import XCTest
-@testable import URLSessionMock
+@testable import Mocky
 
 final class ResponseTests: XCTestCase {
   func test_init() {
