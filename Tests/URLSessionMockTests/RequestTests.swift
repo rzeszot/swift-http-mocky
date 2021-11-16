@@ -54,5 +54,4 @@ final class RequestTests: XCTestCase {
       XCTAssertTrue(error is DecodingError)
     }
   }
-
 }

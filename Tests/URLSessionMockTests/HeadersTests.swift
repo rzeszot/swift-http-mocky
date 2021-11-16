@@ -2,7 +2,6 @@ import XCTest
 import URLSessionMock
 
 final class HeadersTests: XCTestCase {
-
   var headers: Headers!
 
   override func setUp() {
@@ -91,7 +90,6 @@ final class HeadersTests: XCTestCase {
 
     XCTAssertEqual(headers.value(for: "Set-Cookie"), "aaa,bbb")
     XCTAssertEqual(headers.value(for: "Location"), "https://example.org/redirected")
-    XCTAssertEqual(Array(Dictionary(headers).keys), ["Set-Cookie", "Location"])
+    XCTAssertEqual(Array(Dictionary(headers).keys).sorted(), ["Location", "Set-Cookie"])
   }
-
 }

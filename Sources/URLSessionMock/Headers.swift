@@ -1,7 +1,6 @@
 import Foundation
 
 final public class Headers: ExpressibleByDictionaryLiteral {
-
   fileprivate var request = URLRequest(url: URL(string: "https://internal")!)
 
   // MARK: -
@@ -44,7 +43,6 @@ final public class Headers: ExpressibleByDictionaryLiteral {
       set(value, for: key)
     }
   }
-
 }
 
 extension Dictionary where Key == String, Value == String {

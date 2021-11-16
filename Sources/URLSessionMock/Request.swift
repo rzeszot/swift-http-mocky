@@ -1,7 +1,6 @@
 import Foundation
 
 final public class Request {
-
   private let request: URLRequest
 
   init(request: URLRequest) {
@@ -22,5 +21,4 @@ final public class Request {
     guard let body = body else { return nil }
     return try decoder.decode(type, from: body)
   }
-
 }
