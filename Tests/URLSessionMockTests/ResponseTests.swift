@@ -15,7 +15,7 @@ final class ResponseTests: XCTestCase {
     try sut.body(json: Actor.depp)
 
     XCTAssertEqual(sut.headers["Content-Type"], "application/json")
-    XCTAssertEqual(Dictionary(sut.headers).count, 1)
+    XCTAssertEqual(sut.headers.count, 1)
 
     XCTAssertEqual(sut.body, Fixture.depp.data)
   }

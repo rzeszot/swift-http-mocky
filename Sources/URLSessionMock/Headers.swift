@@ -43,6 +43,10 @@ final public class Headers: ExpressibleByDictionaryLiteral {
       set(value, for: key)
     }
   }
+
+  public var count: Int {
+    request.allHTTPHeaderFields?.count ?? 0
+  }
 }
 
 extension Dictionary where Key == String, Value == String {
