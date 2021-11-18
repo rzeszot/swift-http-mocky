@@ -1,3 +1,3 @@
-# swift-urlsession-mock
+# Mocky
 
 A description of this package.

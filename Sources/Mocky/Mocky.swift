@@ -37,7 +37,7 @@ public class Mocky {
   }
 
   public func stop() {
-    MockyURLProtocol.registry = nil
     URLProtocol.unregisterClass(MockyURLProtocol.self)
+    MockyURLProtocol.registry = nil
   }
 }
