@@ -11,16 +11,18 @@ public final class MockyURLProtocol: URLProtocol {
   }
 
   public override class func canInit(with request: URLRequest) -> Bool {
-    registry.find(for: request) != nil
+    !registry.filter(for: request).isEmpty
   }
 
   // MARK: -
 
   public override func startLoading() {
-    let mapping = Self.registry.find(for: request)!
+    let mappings = Self.registry.filter(for: request)
     let env = Environment(request: request)
 
-    mapping.handler(env)
+    for mapping in mappings {
+      mapping.handler(env)
+    }
 
     after(env.delay ?? 0) { [self] in
       self.complete(env)
@@ -63,7 +65,7 @@ extension HTTPURLResponse {
 }
 
 extension Registry where T == Mapping {
-  func find(for request: URLRequest) -> Mapping? {
-    all.first { $0.matcher(request) }
+  func filter(for request: URLRequest) -> [Mapping] {
+    all.filter { $0.matcher(request) }
   }
 }
