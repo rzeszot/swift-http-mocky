@@ -4,6 +4,15 @@ public class Response {
   public var status: Int?
   public let headers: Headers = [:]
   public var body: Data?
+
+  public subscript(_ key: String) -> String? {
+    get {
+      headers[key]
+    }
+    set(value) {
+      headers[key] = value
+    }
+  }
 }
 
 extension Response {

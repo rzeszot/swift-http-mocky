@@ -19,4 +19,12 @@ final class ResponseTests: XCTestCase {
 
     XCTAssertEqual(sut.body, Fixture.depp.data)
   }
+
+  func test_headers() {
+    let sut = Response()
+
+    sut["hello"] = "world"
+
+    XCTAssertEqual(sut["hello"], "world")
+  }
 }
