@@ -12,6 +12,8 @@ let package = Package(
   ],
   targets: [
     .target(name: "Mocky"),
-    .testTarget(name: "MockyTests", dependencies: ["Mocky"])
+    .testTarget(name: "MockyTests", dependencies: ["Mocky"], resources: [
+      .copy("Responses")
+    ])
   ]
 )
