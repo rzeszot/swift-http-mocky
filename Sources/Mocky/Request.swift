@@ -11,6 +11,10 @@ final public class Request {
     request.url
   }
 
+  public var method: String {
+    request.httpMethod ?? "GET"
+  }
+
   public var body: Data? {
     if let data = request.httpBody {
       return data
