@@ -5,8 +5,10 @@ final public class Headers: ExpressibleByDictionaryLiteral {
 
   // MARK: -
 
-  public init() {
-
+  public init(dictionary: [String: String] = [:]) {
+    for (key, value) in dictionary {
+      add(value, for: key)
+    }
   }
 
   // MARK: - ExpressibleByDictionaryLiteral

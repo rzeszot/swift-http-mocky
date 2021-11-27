@@ -25,6 +25,10 @@ final public class Request {
     }
   }
 
+  public var headers: Headers {
+    Headers(dictionary: request.allHTTPHeaderFields ?? [:])
+  }
+
   // MARK: -
 
   public func json<T: Decodable>(type: T.Type, using decoder: JSONDecoder = .init()) throws -> T? {
