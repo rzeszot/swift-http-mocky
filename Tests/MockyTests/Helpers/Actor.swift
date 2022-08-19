@@ -1,15 +1,15 @@
 import Foundation
 
 struct Actor: Codable {
-  let name: String
+    let name: String
 
-  static var depp: Actor {
-    .init(name: "Johnny Depp")
-  }
+    static var depp: Actor {
+        .init(name: "Johnny Depp")
+    }
 }
 
 extension Fixture {
-  static let actors: Fixture = """
+    static let actors: Fixture = """
     [
       {
         "name" : "Tom Hanks"
@@ -26,7 +26,7 @@ extension Fixture {
     ]
     """
 
-  static let depp: Fixture = """
+    static let depp: Fixture = """
     {
       "name" : "Johnny Depp"
     }

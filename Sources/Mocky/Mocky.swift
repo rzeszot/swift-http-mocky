@@ -1,43 +1,47 @@
 import Foundation
 
 public class Mocky {
-  public static let shared = Mocky()
+    public static let shared = Mocky()
 
-  // MARK: -
+    // MARK: -
 
-  private let registry: Registry<Mapping>
+    private let registry: Registry<Mapping>
 
-  init(registry: Registry<Mapping> = .init()) {
-    self.registry = registry
-  }
+    init(registry: Registry<Mapping> = .init()) {
+        self.registry = registry
+    }
 
-  // MARK: - Sugar
+    // MARK: - Sugar
 
-  public func get(_ path: String, with handler: @escaping Handler) {
-    registry.add(.get(path: path, handler: handler))
-  }
+    public func get(_ path: String, with handler: @escaping Handler) {
+        registry.add(.get(path: path, handler: handler))
+    }
 
-  public func post(_ path: String, with handler: @escaping Handler) {
-    registry.add(.post(path: path, handler: handler))
-  }
-  
-  public func unmatch(get id: String) {
-    registry.remove(id: "GET \(id)")
-  }
+    public func post(_ path: String, with handler: @escaping Handler) {
+        registry.add(.post(path: path, handler: handler))
+    }
 
-  public func unmatch(post id: String) {
-    registry.remove(id: "POST \(id)")
-  }
+    public func match(matcher: @escaping Matcher, handler: @escaping Handler, id: String) {
+        registry.add(Mapping(matcher: matcher, handler: handler, id: id))
+    }
 
-  // MARK: -
+    public func unmatch(get id: String) {
+        registry.remove(id: "GET \(id)")
+    }
 
-  public func start() {
-    MockyURLProtocol.registry = registry
-    URLProtocol.registerClass(MockyURLProtocol.self)
-  }
+    public func unmatch(post id: String) {
+        registry.remove(id: "POST \(id)")
+    }
 
-  public func stop() {
-    URLProtocol.unregisterClass(MockyURLProtocol.self)
-    MockyURLProtocol.registry = nil
-  }
+    // MARK: -
+
+    public func start() {
+        MockyURLProtocol.registry = registry
+        URLProtocol.registerClass(MockyURLProtocol.self)
+    }
+
+    public func stop() {
+        URLProtocol.unregisterClass(MockyURLProtocol.self)
+        MockyURLProtocol.registry = nil
+    }
 }

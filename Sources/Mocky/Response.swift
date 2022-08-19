@@ -1,35 +1,35 @@
 import Foundation
 
 public class Response {
-  public var status: Int?
-  public let headers: Headers = [:]
-  public var body: Data?
+    public var status: Int?
+    public let headers: Headers = [:]
+    public var body: Data?
 
-  public subscript(_ key: String) -> String? {
-    get {
-      headers[key]
+    public subscript(_ key: String) -> String? {
+        get {
+            headers[key]
+        }
+        set(value) {
+            headers[key] = value
+        }
     }
-    set(value) {
-      headers[key] = value
-    }
-  }
 }
 
-extension Response {
-  public func body<T: Encodable>(json: T, using encoder: JSONEncoder) throws {
-    body = try encoder.encode(json)
-    headers["Content-Type"] = "application/json"
-  }
+public extension Response {
+    func body<T: Encodable>(json: T, using encoder: JSONEncoder) throws {
+        body = try encoder.encode(json)
+        headers["Content-Type"] = "application/json"
+    }
 
-  public func body<T: Encodable>(json: T) throws {
-    try body(json: json, using: .default)
-  }
+    func body<T: Encodable>(json: T) throws {
+        try body(json: json, using: .default)
+    }
 }
 
 extension JSONEncoder {
-  static var `default`: JSONEncoder {
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-    return encoder
-  }
+    static var `default`: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        return encoder
+    }
 }
