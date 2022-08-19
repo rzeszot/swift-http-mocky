@@ -50,21 +50,21 @@ final class MappingTests: XCTestCase {
         let url = URL(string: "https://example.org/absolute")
 
         XCTAssertNotNil(url)
-        XCTAssertEqual(try url?.path(matches: "^/absolute$"), true)
+        XCTAssertEqual(url?.path(matches: "^/absolute$"), true)
     }
 
     func test_url_matches_pattern() throws {
         let url = URL(string: "https://example.org/absolute")
 
         XCTAssertNotNil(url)
-        XCTAssertEqual(try url?.url(matches: "^https://example.org/absolute$"), true)
+        XCTAssertEqual(url?.url(matches: "^https://example.org/absolute$"), true)
     }
 
     func test_path_matches_regexp() throws {
         let url = URL(string: "https://example.org/animals/123/details")
 
         XCTAssertNotNil(url)
-        XCTAssertEqual(try url?.path(matches: "^/animals/[0-9]+/[a-z]+$"), true)
+        XCTAssertEqual(url?.path(matches: "^/animals/[0-9]+/[a-z]+$"), true)
     }
 }
 

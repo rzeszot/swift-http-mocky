@@ -3,31 +3,35 @@ import Foundation
 public typealias Matcher = (URLRequest) -> Bool
 public typealias Handler = (Environment) -> Void
 
-struct Mapping: Identifiable {
+public struct Mapping: Identifiable {
     public let matcher: Matcher
     public let handler: Handler
     public let id: String
-}
 
-extension Mapping {
-    init(method: String, path: String, handler: @escaping Handler) {
+    public init(matcher: @escaping Matcher, handler: @escaping Handler, id: String) {
+        self.matcher = matcher
+        self.handler = handler
+        self.id = id
+    }
+
+    public init(method: String, path: String, handler: @escaping Handler) {
         let id = "\(method) \(path)"
         let matcher: Matcher = { request in
-            try! request.httpMethod == method && request.url?.path(matches: path) == true
+            request.httpMethod == method && request.url?.path(matches: path) == true
         }
 
         self.init(matcher: matcher, handler: handler, id: id)
     }
 
-    static func get(path: String, handler: @escaping Handler) -> Mapping {
+    public static func get(path: String, handler: @escaping Handler) -> Mapping {
         .init(method: "GET", path: path, handler: handler)
     }
 
-    static func post(path: String, handler: @escaping Handler) -> Mapping {
+    public static func post(path: String, handler: @escaping Handler) -> Mapping {
         .init(method: "POST", path: path, handler: handler)
     }
 
-    static func patch(path: String, handler: @escaping Handler) -> Mapping {
+    public static func patch(path: String, handler: @escaping Handler) -> Mapping {
         .init(method: "PATCH", path: path, handler: handler)
     }
 }
@@ -37,16 +41,26 @@ extension URL {
         matches(what: absoluteString, regexp: regexp)
     }
 
-    func url(matches pattern: String) throws -> Bool {
-        url(matches: try NSRegularExpression(pattern: pattern, options: []))
+    func url(matches pattern: String) -> Bool {
+        do {
+            let regexp = try NSRegularExpression(pattern: pattern, options: [])
+            return url(matches: regexp)
+        } catch {
+            return false
+        }
     }
 
     func path(matches regexp: NSRegularExpression) -> Bool {
         matches(what: path, regexp: regexp)
     }
 
-    func path(matches pattern: String) throws -> Bool {
-        path(matches: try NSRegularExpression(pattern: pattern, options: []))
+    func path(matches pattern: String) -> Bool {
+        do {
+            let regexp = try NSRegularExpression(pattern: pattern, options: [])
+            return path(matches: regexp)
+        } catch {
+            return false
+        }
     }
 
     // MARK: -
